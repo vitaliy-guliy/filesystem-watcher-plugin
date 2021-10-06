@@ -16,7 +16,7 @@ on:
       rebuild_all:
         description: 'Rebuild all sidecar images:'
         required: true
-        default: false
+        default: "false"
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -38,4 +38,4 @@ jobs:
       - name: Rebuild images
         run: |
           echo "> run the script"
-          ./build/build-sidecar-images-on-push.sh --push --rm --update-devfiles --rebuild-all=${{ github.event.inputs.theia_branch }}
+          ./build/build-sidecar-images-on-push.sh --push --rm --update-devfiles --rebuild-all=${{ github.event.inputs.rebuild_all }}
