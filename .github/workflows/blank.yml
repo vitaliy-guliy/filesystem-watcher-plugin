@@ -13,14 +13,10 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
     inputs:
-      theia_github_repo:
-        description: 'Theia GitHub repository to build Che-Theia image on top:'
+      rebuild_all:
+        description: 'Rebuild all sidecar images:'
         required: true
-        default: eclipse-theia/theia
-      theia_branch:
-        description: 'Theia branch:'
-        required: true
-        default: master
+        default: false
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -38,22 +34,10 @@ jobs:
       - name: Run a one-line script
         run: echo Hello, world!
 
-      - name: Add some file
-        run: |
-          echo "Hello, world!" > hello.txt
-          export E_BRANCH=${{ github.event.inputs.theia_branch }}
-          echo "-------------------------------------------------------"
-          export
-          echo "-------------------------------------------------------"
-
-      - name: Git status
-        run: |
-          echo "-------------------------------------------------------"
-          git status
-          echo "-------------------------------------------------------"
-
       # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      - name: Rebuild images
         run: |
-          echo Add other actions to build,
           echo test, and deploy your project.
+        run: |
+          echo "> run the script"
+          ./build/build-sidecar-images-on-push.sh --push --rm --update-devfiles --rebuild-all=${{ github.event.inputs.theia_branch }}
