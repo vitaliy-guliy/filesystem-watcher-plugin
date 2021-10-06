@@ -38,4 +38,8 @@ jobs:
       - name: Rebuild images
         run: |
           echo "> run the script"
-          ./build/build-sidecar-images-on-push.sh --push --rm --update-devfiles --rebuild-all=${{ github.event.inputs.rebuild_all }}
+          if [[ "${{ github.event.inputs.rebuild_all }}" == "true" ]]; then
+            ./build/build-sidecar-images-on-push.sh --push --rm --update-devfiles --rebuild-all
+          else
+            ./build/build-sidecar-images-on-push.sh --push --rm --update-devfiles
+          fi

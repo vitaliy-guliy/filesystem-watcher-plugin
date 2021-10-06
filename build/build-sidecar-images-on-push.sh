@@ -15,14 +15,14 @@ set -u
 PUSH=""
 REMOVE=""
 UPDATE_DEVFILES=""
-REBUILD_ALL=""
+REBUILD_ALL=false
 
 while [[ "$#" -gt 0 ]]; do
   case $1 in
     '--push') PUSH="--push"; shift 0;;
     '--rm') REMOVE="--rm"; shift 0;;
     '--update-devfiles') UPDATE_DEVFILES="--update-devfiles"; shift 0;;
-    '--rebuild-all') REBUILD_ALL="$2"; shift 1;;
+    '--rebuild-all') REBUILD_ALL=true; shift 0;;
   esac
   shift 1
 done
