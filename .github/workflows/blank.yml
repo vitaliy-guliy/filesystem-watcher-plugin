@@ -42,13 +42,15 @@ jobs:
         run: |
           echo "Hello, world!" > hello.txt
           export E_BRANCH=${{ github.event.inputs.theia_branch }}
+          echo "-------------------------------------------------------"
+          export
+          echo "-------------------------------------------------------"
 
       - name: Git status
         run: |
           echo "-------------------------------------------------------"
           git status
           echo "-------------------------------------------------------"
-          export
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
