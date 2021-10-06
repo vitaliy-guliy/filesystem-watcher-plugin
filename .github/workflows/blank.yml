@@ -12,6 +12,15 @@ on:
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+    inputs:
+      theia_github_repo:
+        description: 'Theia GitHub repository to build Che-Theia image on top:'
+        required: true
+        default: eclipse-theia/theia
+      theia_branch:
+        description: 'Theia branch:'
+        required: true
+        default: master
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -32,12 +41,14 @@ jobs:
       - name: Add some file
         run: |
           echo "Hello, world!" > hello.txt
+          export E_BRANCH=${{ github.event.inputs.theia_branch }}
 
       - name: Git status
         run: |
           echo "-------------------------------------------------------"
           git status
           echo "-------------------------------------------------------"
+          export
 
       # Runs a set of commands using the runners shell
       - name: Run a multi-line script
