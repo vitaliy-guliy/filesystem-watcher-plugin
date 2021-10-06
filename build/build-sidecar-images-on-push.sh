@@ -61,7 +61,7 @@ set +e
 CHANGES=$(git show --pretty="format:" --name-only "${COMMIT_SHA}" | grep -E "dockerfiles/base.dockerfile|dockerfiles/entrypoint.sh|dockerfiles/install-editor-tooling.sh")
 set -e
 
-if [ -n "${CHANGES}" ]; then
+if [ -n "${CHANGES}" ] || ${REBUILD_ALL}; then
   echo -e "\nRebuild ALL images"
   #./dockerfiles/build.sh --all ${PUSH} ${REMOVE} ${UPDATE_DEVFILES}
   exit 0
